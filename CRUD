@@ -22,58 +22,58 @@ struct Pessoa pessoas[MAX];
 // Variável que armazena quantas pessoas já foram cadastradas
 int qtd = 0;
 
-// Fun��o que cadastra uma nova pessoa
+// Função que cadastra uma nova peça
 void cadastrar() {
     // Verifica se o limite de cadastros foi atingido
     if (qtd >= MAX) {
         printf("\nLimite de pessoas atingido (%d cadastros)!\n", MAX);
-        return; // Encerra a fun��o
+        return; // Encerra a função
     }
 
     printf("\n--- NOVO CADASTRO ---\n");
 
-    // Pede os dados da pessoa: c�digo, nome e idade
+    // Pede os dados da peça: código, nome e idade
     printf("Codigo: ");
     scanf("%d", &pessoas[qtd].codigo);
     while(getchar() != '\n'); // Limpa o "lixo" do buffer do teclado
 
     printf("Nome: ");
-    scanf(" %49[^\n]", pessoas[qtd].nome); // L� at� 49 caracteres com espa�os
+    scanf(" %49[^\n]", pessoas[qtd].nome); // Lê até 49 caracteres com espaços
 
-    printf("Idade: ");
-    scanf("%d", &pessoas[qtd].idade);
+    printf("Especificação: ");
+    scanf("%d", &peças[qtd].especificação);
 
-    // Aumenta o n�mero de pessoas cadastradas
+    // Aumenta o número de peças cadastradas
     qtd++;
 
     printf("\nCadastro realizado com sucesso!\n");
 }
 
-// Fun��o que busca uma pessoa pelo c�digo informado
+// Função que busca uma pessoa pelo código informado
 int buscarPorCodigo(int codigo) {
     int i;
     for (i = 0; i < qtd; i++) {
         if (pessoas[i].codigo == codigo) {
-            return i; // Retorna o �ndice da pessoa no vetor
+            return i; // Retorna o índice da peça no vetor
         }
     }
-    return -1; // Retorna -1 se n�o encontrou
+    return -1; // Retorna -1 se não encontrou
 }
 
-// Fun��o que edita os dados de uma pessoa
+// Função que edita os dados de uma peça
 void editar() {
     int codigo, index;
 
     printf("\n--- EDITAR CADASTRO ---\n");
-    printf("Digite o codigo da pessoa: ");
+    printf("Digite o codigo da peça: ");
     scanf("%d", &codigo);
 
-    // Procura a pessoa com o c�digo digitado
+    // Procura a peça com o código digitado
     index = buscarPorCodigo(codigo);
 
-    // Se n�o encontrar, avisa e retorna
+    // Se não encontrar, avisa e retorna
     if (index == -1) {
-        printf("\nPessoa nao encontrada!\n");
+        printf("\nPeça nao encontrada!\n");
         return;
     }
 
@@ -81,48 +81,48 @@ void editar() {
     printf("\nEDITANDO CADASTRO:\n");
     printf("Codigo: %d\n", pessoas[index].codigo);
     printf("Nome atual: %s\n", pessoas[index].nome);
-    printf("Idade atual: %d\n\n", pessoas[index].idade);
+    printf("Especificação atual: %d\n\n", pessoas[index].idade);
 
     // Pede os novos dados
     printf("Novo nome: ");
-    scanf(" %49[^\n]", pessoas[index].nome);
+    scanf(" %49[^\n]", peças[index].nome);
 
-    printf("Nova idade: ");
-    scanf("%d", &pessoas[index].idade);
+    printf("Nova especificação: ");
+    scanf("%d", &peças[index].especificação);
 
     printf("\nCadastro atualizado com sucesso!\n");
 }
 
-// Fun��o que exclui uma pessoa do sistema
+// Função que exclui uma peça do sistema
 void excluir() {
     int codigo, index;
     char confirmacao;
 
     printf("\n--- EXCLUIR CADASTRO ---\n");
-    printf("Digite o codigo da pessoa: ");
+    printf("Digite o codigo da peça: ");
     scanf("%d", &codigo);
 
     index = buscarPorCodigo(codigo);
 
     if (index == -1) {
-        printf("\nPessoa nao encontrada!\n");
+        printf("\nPeça nao encontrada!\n");
         return;
     }
 
-    // Mostra os dados da pessoa e pede confirma��o
+    // Mostra os dados da peça e pede confirmação
     printf("\nCONFIRMAR EXCLUSAO:\n");
-    printf("Codigo: %d\n", pessoas[index].codigo);
-    printf("Nome: %s\n", pessoas[index].nome);
-    printf("Idade: %d\n", pessoas[index].idade);
+    printf("Codigo: %d\n", peças[index].codigo);
+    printf("Nome: %s\n", peças[index].nome);
+    printf("Idade: %d\n", peças[index].idade);
 
     printf("\nTem certeza que deseja excluir? (s/n): ");
     scanf(" %c", &confirmacao);
 
-    // Se confirmar, remove a pessoa do vetor e ajusta a quantidade
+    // Se confirmar, remove a peça do vetor e ajusta a quantidade
     if (confirmacao == 's' || confirmacao == 'S') {
         int i;
         for (i = index; i < qtd - 1; i++) {
-            pessoas[i] = pessoas[i + 1]; // Desloca os dados para "tapar o buraco"
+            peças[i] = peças[i + 1]; // Desloca os dados para "tapar o buraco"
         }
         qtd--; // Diminui a quantidade total
         printf("\nCadastro excluido com sucesso!\n");
@@ -131,43 +131,43 @@ void excluir() {
     }
 }
 
-// Fun��o que lista todas as pessoas cadastradas
+// Função que lista todas as peças cadastradas
 void listar() {
-    printf("\n--- PESSOAS CADASTRADAS ---\n");
+    printf("\n--- PEÇAS CADASTRADAS ---\n");
     printf("Total: %d\n\n", qtd);
 
     if (qtd == 0) {
-        printf("Nenhuma pessoa cadastrada.\n");
+        printf("Nenhuma peça cadastrada.\n");
         return;
     }
 
-    // Cabe�alho da tabela
-    printf("CODIGO  NOME%-42s IDADE\n", "");
+    // Cabeçalho da tabela
+    printf("CODIGO  NOME%-42s ESPECIFICAÇÃO\n", "");
     printf("--------------------------------------------------\n");
 
-    // Mostra os dados de cada pessoa
+    // Mostra os dados de cada peça
     int i;
     for (i = 0; i < qtd; i++) {
         printf("%-8d%-45s%d\n",
-               pessoas[i].codigo,
-               pessoas[i].nome,
-               pessoas[i].idade);
+               peças[i].codigo,
+               peças[i].nome,
+               peças[i].idade);
     }
 }
 
-// Fun��o principal (ponto de entrada do programa)
+// Função principal (ponto de entrada do programa)
 int main() {
     int op;
 
     printf("\n----------------------------------------");
-    printf("\n    SISTEMA DE CADASTRO DE PESSOAS");
+    printf("\n    SISTEMA DE CADASTRO DE PEÇAS");
     printf("\n----------------------------------------\n");
 
     // Loop principal do menu
     do {
         printf("\n----------- MENU PRINCIPAL -----------\n");
-        printf("1. Cadastrar nova pessoa\n");
-        printf("2. Listar todas as pessoas\n");
+        printf("1. Cadastrar nova pesça\n");
+        printf("2. Listar todas as peças\n");
         printf("3. Editar cadastro existente\n");
         printf("4. Excluir cadastro\n");
         printf("0. Sair do sistema\n");
@@ -176,7 +176,7 @@ int main() {
         scanf("%d", &op);
         while(getchar() != '\n'); // Limpa o buffer do teclado
 
-        // Executa a op��o escolhida
+        // Executa a opção escolhida
         switch (op) {
             case 1: cadastrar(); break;
             case 2: listar(); break;
@@ -186,7 +186,7 @@ int main() {
             default: printf("\nOpcao invalida! Tente novamente.\n");
         }
 
-    } while (op != 0); // Repete at� o usu�rio escolher sair
+    } while (op != 0); // Repete até o usuário escolher sair
 
     printf("\nObrigado por utilizar o sistema!\n");
     return 0; // Finaliza o programa
