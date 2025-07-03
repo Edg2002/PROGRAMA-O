@@ -18,15 +18,15 @@ struct Peça {
 };
 
 // Vetor que armazena até 10000 peças
-struct Pessoa pessoas[MAX];
-// Variável que armazena quantas pessoas já foram cadastradas
+struct Peça peças[MAX];
+// Variável que armazena quantas peças já foram cadastradas
 int qtd = 0;
 
 // Função que cadastra uma nova peça
 void cadastrar() {
     // Verifica se o limite de cadastros foi atingido
     if (qtd >= MAX) {
-        printf("\nLimite de pessoas atingido (%d cadastros)!\n", MAX);
+        printf("\nLimite de peças atingido (%d cadastros)!\n", MAX);
         return; // Encerra a função
     }
 
@@ -34,11 +34,11 @@ void cadastrar() {
 
     // Pede os dados da peça: código, nome e idade
     printf("Codigo: ");
-    scanf("%d", &pessoas[qtd].codigo);
+    scanf("%d", &peças[qtd].codigo);
     while(getchar() != '\n'); // Limpa o "lixo" do buffer do teclado
 
     printf("Nome: ");
-    scanf(" %49[^\n]", pessoas[qtd].nome); // Lê até 49 caracteres com espaços
+    scanf(" %49[^\n]", peças[qtd].nome); // Lê até 49 caracteres com espaços
 
     printf("Especificação: ");
     scanf("%d", &peças[qtd].especificação);
@@ -49,11 +49,11 @@ void cadastrar() {
     printf("\nCadastro realizado com sucesso!\n");
 }
 
-// Função que busca uma pessoa pelo código informado
+// Função que busca uma peça pelo código informado
 int buscarPorCodigo(int codigo) {
     int i;
     for (i = 0; i < qtd; i++) {
-        if (pessoas[i].codigo == codigo) {
+        if (peças[i].codigo == codigo) {
             return i; // Retorna o índice da peça no vetor
         }
     }
@@ -79,9 +79,9 @@ void editar() {
 
     // Mostra os dados atuais
     printf("\nEDITANDO CADASTRO:\n");
-    printf("Codigo: %d\n", pessoas[index].codigo);
-    printf("Nome atual: %s\n", pessoas[index].nome);
-    printf("Especificação atual: %d\n\n", pessoas[index].idade);
+    printf("Codigo: %d\n", peças[index].codigo);
+    printf("Nome atual: %s\n", peças[index].nome);
+    printf("Especificação atual: %d\n\n", peças[index].idade);
 
     // Pede os novos dados
     printf("Novo nome: ");
