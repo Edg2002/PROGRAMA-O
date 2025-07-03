@@ -1,5 +1,5 @@
 /*
- * Funcionalidades:
+ * Funcionalespecificacao:
  * 1. Cadastrar pecas (codigo, nome, especificacao)
  * 2. Listar todas as pecas em estoque
  * 3. Editar cadastros existentes
@@ -32,7 +32,7 @@ void cadastrar() {
 
     printf("\n--- NOVO CADASTRO ---\n");
 
-    // Pede os dados da peca: código, nome e idade
+    // Pede os dados da peca: código, nome e especificacao
     printf("Codigo: ");
     scanf("%d", &pecas[qtd].codigo);
     while(getchar() != '\n'); // Limpa o "lixo" do buffer do teclado
@@ -81,7 +81,7 @@ void editar() {
     printf("\nEDITANDO CADASTRO:\n");
     printf("Codigo: %d\n", pecas[index].codigo);
     printf("Nome atual: %s\n", pecas[index].nome);
-    printf("especificacao atual: %d\n\n", pecas[index].idade);
+    printf("especificacao atual: %d\n\n", pecas[index].especificacao);
 
     // Pede os novos dados
     printf("Novo nome: ");
@@ -113,18 +113,18 @@ void excluir() {
     printf("\nCONFIRMAR EXCLUSAO:\n");
     printf("Codigo: %d\n", pecas[index].codigo);
     printf("Nome: %s\n", pecas[index].nome);
-    printf("Idade: %d\n", pecas[index].idade);
+    printf("especificacao: %d\n", pecas[index].especificacao);
 
     printf("\nTem certeza que deseja excluir? (s/n): ");
     scanf(" %c", &confirmacao);
 
-    // Se confirmar, remove a peca do vetor e ajusta a quantidade
+    // Se confirmar, remove a peca do vetor e ajusta a quantespecificacao
     if (confirmacao == 's' || confirmacao == 'S') {
         int i;
         for (i = index; i < qtd - 1; i++) {
             pecas[i] = pecas[i + 1]; // Desloca os dados para "tapar o buraco"
         }
-        qtd--; // Diminui a quantidade total
+        qtd--; // Diminui a quantespecificacao total
         printf("\nCadastro excluido com sucesso!\n");
     } else {
         printf("\nOperacao cancelada.\n");
@@ -151,7 +151,7 @@ void listar() {
         printf("%-8d%-45s%d\n",
                pecas[i].codigo,
                pecas[i].nome,
-               pecas[i].idade);
+               pecas[i].especificacao);
     }
 }
 
